@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting Widget with Date and Time</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .greeting, .datetime {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="greeting" id="greeting">Hello, welcome back! 👋</div>
+    <div class="datetime" id="date"></div>
+    <div class="datetime" id="time"></div>
+
+    <script>
+        const greetingEl = document.getElementById('greeting');
+        const dateEl = document.getElementById('date');
+        const timeEl = document.getElementById('time');
+
+        const now = new Date();
+        const hour = now.getHours();
+
+        let greetingText = "Hello!";
+        if (hour < 12) {
+            greetingText = "Good morning! ☀️";
+        } else if (hour < 18) {
+            greetingText = "Good afternoon! 🌤️";
+        } else {
+            greetingText = "Good evening! 🌙";
+        }
+
+        greetingEl.textContent = greetingText;
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.textContent = now.toLocaleDateString(undefined, options);
+
+        function updateTime() {
+            const now = new Date();
+            timeEl.textContent = now.toLocaleTimeString();
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
